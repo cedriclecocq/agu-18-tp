@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {RechercheComponent} from "./recherche/recherche.component";
 import {ListeComponent} from "./liste/liste.component";
 import {DetailComponent} from "./detail/detail.component";
+import {VelibService} from "./services/velib.service";
 
 @Component({
   selector: 'app-velib',
@@ -11,6 +12,7 @@ import {DetailComponent} from "./detail/detail.component";
     ListeComponent,
     DetailComponent
   ],
+  providers: [ VelibService ],
   templateUrl: './velib.component.html',
   styleUrl: './velib.component.css'
 })

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { DatePipe } from "@angular/common";
 import { Station } from "../station.type";
+import { VelibService } from "../services/velib.service";
 
 @Component({
   selector: 'app-detail',
@@ -12,20 +13,9 @@ import { Station } from "../station.type";
   styleUrl: './detail.component.css'
 })
 export class DetailComponent {
-  station: Station = {
-    "id": 17278902806,
-    "name": "Rouget de L'isle - Watteau",
-    "lat": 48.778192750803,
-    "lon": 2.3963020229163,
-    "capacity": 20,
-    "stationCode": "44015",
-    "numBikesAvailable": 12,
-    "numMechanicalBikesAvailable": 4,
-    "numEbikeBikesAvailable": 8,
-    "numDocksAvailable": 6,
-    "isInstalled": true,
-    "isReturning": true,
-    "isRenting": true,
-    "lastReported": 1699548492
-  };
+  station: Station;
+
+  constructor(private velibService: VelibService) {
+    this.station = this.velibService.getById(17278902806);
+  }
 }
