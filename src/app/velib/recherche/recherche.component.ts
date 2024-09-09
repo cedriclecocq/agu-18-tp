@@ -1,4 +1,4 @@
-import { Component, EventEmitter } from '@angular/core';
+import { Component, output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
 import { debounceTime, filter } from "rxjs";
 import { RechercheValue } from "../recherche-value";
@@ -15,9 +15,7 @@ import { RechercheValue } from "../recherche-value";
 export class RechercheComponent {
   rechercheForm;
 
-  protected readonly JSON = JSON;
-
-  values: EventEmitter<Partial<RechercheValue>> = new EventEmitter<Partial<RechercheValue>>();
+  values = output<Partial<RechercheValue>>();
 
   constructor(private fb: FormBuilder) {
     this.rechercheForm = this.fb.group({
@@ -33,8 +31,5 @@ export class RechercheComponent {
     ).subscribe({
       next: value => this.values.emit(value)
     });
-
-    this.values.subscribe(value => console.log(`obs1 : ${value.name}`));
-    this.values.subscribe(value => console.log(`obs2 : ${value.name}`));
   }
 }
