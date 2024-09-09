@@ -1,9 +1,17 @@
 <h2>Détail de la station :</h2>
 <p>
   {{station.name}}
-  {{station.isInstalled ? '🟩' : '🟥'}}
-  {{station.isRenting ? '⬆️' : ''}}
-  {{station.isReturning ? '⬇️' : ''}}
+  @if (station.isInstalled) {
+    <img src="images/ok.png" title="Installé">
+  } @else {
+    <img src="images/en-cours.png" title="En cours d'installation">
+  }
+  @if (station.isRenting) {
+    <img src="images/fleche-bas.png" title="Location possible">
+  }
+  @if (station.isReturning) {
+    <img src="images/fleche-haut.png" title="Retour possible">
+  }
 </p>
 <p>Localisation : ({{station.lat}}, {{station.lon}})</p>
 <p>Capacité : {{station.capacity}} ({{station.numBikesAvailable}} disponibles
