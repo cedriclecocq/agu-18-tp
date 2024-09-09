@@ -16,6 +16,13 @@ export class RechercheComponent {
     isInstalled: new FormControl(false),
     isRenting: new FormControl(false),
     idReturning: new FormControl(false)
-  })
+  });
+
   protected readonly JSON = JSON;
+
+  constructor() {
+    this.rechercheForm.valueChanges.subscribe({
+      next: value => console.log(value)
+    });
+  }
 }
