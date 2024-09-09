@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
+import { PercentPipe } from "@angular/common";
 import { Station } from "../station.type";
 
 @Component({
   selector: 'app-liste',
   standalone: true,
-  imports: [],
+  imports: [
+    PercentPipe
+  ],
   templateUrl: './liste.component.html',
   styleUrl: './liste.component.css'
 })

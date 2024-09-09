@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
+import { DatePipe } from "@angular/common";
 import { Station } from "../station.type";
 
 @Component({
   selector: 'app-detail',
   standalone: true,
-  imports: [],
+  imports: [
+    DatePipe
+  ],
   templateUrl: './detail.component.html',
   styleUrl: './detail.component.css'
 })

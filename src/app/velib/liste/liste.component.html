@@ -24,6 +24,9 @@
           <img src="images/fleche-haut.png" title="Retour possible">
         }
       </td>
+      @if (station.capacity > 0) {
+        {{station.numBikesAvailable / station.capacity | percent:'1.2-2'}}
+      }
     </tr>
   }
 </table>
