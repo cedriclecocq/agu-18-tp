@@ -1,4 +1,4 @@
-import {Component, input} from '@angular/core';
+import { Component, effect, input } from '@angular/core';
 import { PercentPipe } from "@angular/common";
 import { Station } from "../station.type";
 import { VelibService } from "../services/velib.service";
@@ -20,7 +20,9 @@ export class ListeComponent {
 
   constructor(private velibService: VelibService) {
     this.stations = this.velibService.getList();
-  }
 
-  protected readonly JSON = JSON;
+    effect(() => {
+      console.log(this.criteres());
+    });
+  }
 }

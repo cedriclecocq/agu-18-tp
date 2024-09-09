@@ -1,6 +1,6 @@
-import { Component, output } from '@angular/core';
+import { Component, OnDestroy, output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
-import { debounceTime, filter } from "rxjs";
+import { debounceTime, filter, Subscription } from "rxjs";
 import { RechercheValue } from "../recherche-value";
 
 @Component({
@@ -12,8 +12,9 @@ import { RechercheValue } from "../recherche-value";
   templateUrl: './recherche.component.html',
   styleUrl: './recherche.component.css'
 })
-export class RechercheComponent {
+export class RechercheComponent implements OnDestroy {
   rechercheForm;
+  subscriptionRecherche: Subscription | undefined;
 
   values = output<Partial<RechercheValue>>();
 
@@ -25,11 +26,15 @@ export class RechercheComponent {
       idReturning: [false, Validators.required]
     });
 
-    this.rechercheForm.valueChanges.pipe(
+    this.subscriptionRecherche = this.rechercheForm.valueChanges.pipe(
       filter(formValue => formValue.name?.length ? formValue.name.length >= 3 : false),
       debounceTime(500)
     ).subscribe({
       next: value => this.values.emit(value)
     });
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptionRecherche?.unsubscribe();
   }
 }
